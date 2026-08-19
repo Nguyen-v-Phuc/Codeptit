@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define FOR(i, a, b) for(int i = a; i < b; i++)
+#define FORE(i, a, b) for(int i = a; i <= b; i++)
+#define FORLL(i, a, b) for(ll i = a; i < b; i++)
+#define FORELL(i, a, b) for(ll i = a; i <= b; i++)
+#define FORD(i, a, b) for(int i = a; i > b; i--)
+#define INF 2e9 // 2e9
+#define INFLL 2e18 // 2e18
+#define esp 1e-9
+#define PI 3.14159265
+
+inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
+inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
+
+const long long per[] = {
+    6LL,
+    28LL,
+    496LL,
+    8128LL,
+    33550336LL,
+    8589869056LL,
+    137438691328LL,
+    2305843008139952128LL
+};
+
+void solve()
+{
+    ll n;
+    cin >> n;
+
+    for(ll i : per) {
+        if(i == n) {
+            cout << "1\n";
+            return;
+        }
+    }
+    cout << "0\n";
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int tc;
+    cin >> tc;
+    while(tc--) {
+        solve();
+    }
+    return 0;
+}
