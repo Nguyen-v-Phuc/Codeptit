@@ -1,2 +1,2 @@
 # Codeptit-CPP
-Giải codeptit
+Giải bài tập trên trang codeptit
