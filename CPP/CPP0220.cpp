@@ -18,7 +18,6 @@ void solve()
 {
     int n;
     cin >> n;
-    1 5 3
     vector<vector<int>> grid(n, vector<int>(n));
 
     FOR(i, 0, n) {
