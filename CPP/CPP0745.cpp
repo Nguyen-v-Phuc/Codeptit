@@ -25,26 +25,19 @@ const ll MOD = 1e9 + 7;
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
 
-vector<ll> dp(93);
-void FIB()
-{
-    dp[0] = 0;
-    dp[1] = 1;
-
-    FORELL(i, 2, 92) {
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-}
-
+vector<ll> dp(1001);
 void solve()
 {
     ll n;
     cin >> n;
 
-    if(binary_search(dp.begin(), dp.end(), n)) {
-        cout << "YES\n";
+    dp[0] = 0;
+    dp[1] = 1;
+
+    FORELL(i, 2, 1000) {
+        dp[i] = (dp[i-1] + dp[i-2]) % MOD;
     }
-    else cout << "NO\n";
+    cout << dp[n] << "\n";
 }
 
 int main()
@@ -52,7 +45,6 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    FIB();
     int tc;
     cin >> tc;
     while(tc--) {

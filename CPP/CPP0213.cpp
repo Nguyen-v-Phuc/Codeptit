@@ -21,6 +21,7 @@ using ll = long long;
 #define PI 3.14159265
 const ll MOD = 1e9 + 7;
 #define pb push_back
+#define eb emplace_back
 
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
@@ -32,19 +33,28 @@ void FIB()
     dp[1] = 1;
 
     FORELL(i, 2, 92) {
-        dp[i] = dp[i-1] + dp[i-2];
+        dp[i] = (dp[i-1] + dp[i-2]);
     }
 }
 
 void solve()
 {
-    ll n;
+    int n;
     cin >> n;
+    vector<int> v(n);
+    vector<int> res;
+    FOR(i, 0, n) cin >> v[i];
 
-    if(binary_search(dp.begin(), dp.end(), n)) {
-        cout << "YES\n";
+    FOR(i, 0, n) {
+        if(binary_search(dp.begin(), dp.end(), (ll)v[i])) {
+            res.eb(v[i]);
+        }
     }
-    else cout << "NO\n";
+
+    FOR(i, 0, res.size()) {
+        cout << res[i] << " ";
+    }
+    cout << "\n";
 }
 
 int main()

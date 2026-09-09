@@ -15,7 +15,7 @@ using ll = long long;
 #define FORLL(i, a, b) for(ll i = a; i < b; i++)
 #define FORELL(i, a, b) for(ll i = a; i <= b; i++)
 #define FORD(i, a, b) for(int i = a; i > b; i--)
-#define INF 2e9 // 1e9
+#define INF 2e9 // 2e9
 #define INFLL 2e18 // 2e18
 #define esp 1e-9
 #define PI 3.14159265
@@ -25,34 +25,25 @@ const ll MOD = 1e9 + 7;
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
 
-vector<ll> dp(93);
-void FIB()
-{
-    dp[0] = 0;
-    dp[1] = 1;
-
-    FORELL(i, 2, 92) {
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-}
-
 void solve()
 {
-    ll n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
 
-    if(binary_search(dp.begin(), dp.end(), n)) {
-        cout << "YES\n";
+    ll res = 0;
+
+    FORELL(i, 1, n) {
+        res += i % k;
     }
-    else cout << "NO\n";
+
+    cout << res << "\n";
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    FIB();
+    
     int tc;
     cin >> tc;
     while(tc--) {

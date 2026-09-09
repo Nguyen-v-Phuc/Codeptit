@@ -9,50 +9,47 @@
 */
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+#define ll long long
 #define FOR(i, a, b) for(int i = a; i < b; i++)
 #define FORE(i, a, b) for(int i = a; i <= b; i++)
 #define FORLL(i, a, b) for(ll i = a; i < b; i++)
 #define FORELL(i, a, b) for(ll i = a; i <= b; i++)
 #define FORD(i, a, b) for(int i = a; i > b; i--)
-#define INF 2e9 // 1e9
+#define INF 2e9 // 2e9
 #define INFLL 2e18 // 2e18
 #define esp 1e-9
 #define PI 3.14159265
-const ll MOD = 1e9 + 7;
-#define pb push_back
+const ll MOD = 1e9+7;
 
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
 
-vector<ll> dp(93);
-void FIB()
-{
-    dp[0] = 0;
-    dp[1] = 1;
-
-    FORELL(i, 2, 92) {
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-}
-
 void solve()
 {
-    ll n;
+    int n;
     cin >> n;
 
-    if(binary_search(dp.begin(), dp.end(), n)) {
-        cout << "YES\n";
+    FORE(i, 2, sqrt(n)) {
+        if(n % i == 0) {
+            int cnt = 0;
+            while(n % i == 0) {
+                cnt++;
+                n /= i;
+            }
+            cout << i << " " << cnt << " ";
+        }
     }
-    else cout << "NO\n";
+    if(n > 1) {
+        cout << n << " " << 1;
+    }
+    cout << "\n";
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    FIB();
+    
     int tc;
     cin >> tc;
     while(tc--) {
