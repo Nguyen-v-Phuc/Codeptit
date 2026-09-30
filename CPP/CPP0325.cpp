@@ -34,45 +34,38 @@ const ll MOD = 1000000007LL;
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
 
-const int MAX = 1000005;
-bool isPrime[MAX];
-vector<long long> primes;
-
-void sieve() {
-    fill(isPrime, isPrime + MAX, true);
-    isPrime[0] = isPrime[1] = false;
-    
-    for(int i = 2; i * i < MAX; ++i) {
-        if(isPrime[i]) {
-            for(int j = i * i; j < MAX; j += i) {
-                isPrime[j] = false;
-            }
-        }
-    }
-    
-    for(int i = 2; i < MAX; ++i) {
-        if(isPrime[i]) {
-            primes.push_back(i);
-        }
-    }
+bool even(int n)
+{
+    return (n % 2 == 0);
 }
 
 void solve()
 {
-    long long n;
-    cin >> n;
+    string s;
+    cin >> s;
+    ll e = 0, o = 0;
 
-    long long limit = sqrt(n);
-    auto it = upper_bound(primes.begin(), primes.end(), limit);
-    cout << (it - primes.begin()) << "\n";
+    FOR(i, 0, sz(s)) {
+        if(even(i)) {
+            e += s[i] - '0';
+        }
+        else {
+            o += s[i] - '0';
+        }
+    }
+
+    if(abs(e - o) % 11 == 0) {
+        cout << "1\n";
+    }
+    else {
+        cout << "0\n";
+    }
 }
 
 signed main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    sieve();
     
     int tc;
     cin >> tc;

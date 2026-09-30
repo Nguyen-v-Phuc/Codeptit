@@ -10,14 +10,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
 #define FOR(i, a, b) for(int i = a; i < b; i++)
 #define FORE(i, a, b) for(int i = a; i <= b; i++)
 #define FORLL(i, a, b) for(ll i = a; i < b; i++)
 #define FORELL(i, a, b) for(ll i = a; i <= b; i++)
 #define FORD(i, a, b) for(int i = a; i > b; i--)
-#define u_map unordered_map
-#define u_set unordered_set
 
 const int INF = 2e9;
 const ll INFLL = 2e18;
@@ -27,44 +26,38 @@ const ll MOD = 1000000007LL;
 
 #define pb push_back
 #define eb emplace_back
-#define pop pop_back
 #define ALL(v) (v).begin(), (v).end()
 #define sz(s) (ll)(s).length() // use for string
 
 inline ll GCD(ll a, ll b) {while (b != 0) {ll c = a % b; a = b; b = c;} return a;};
 inline ll LCM(ll a, ll b) {return (a / GCD(a,b)) * b;};
 
-const int MAX = 1000005;
-bool isPrime[MAX];
-vector<long long> primes;
+const int MAX = 10000005;
+int minPrime[MAX];
 
 void sieve() {
-    fill(isPrime, isPrime + MAX, true);
-    isPrime[0] = isPrime[1] = false;
-    
-    for(int i = 2; i * i < MAX; ++i) {
-        if(isPrime[i]) {
-            for(int j = i * i; j < MAX; j += i) {
-                isPrime[j] = false;
-            }
-        }
+    for(int i = 1; i < MAX; ++i) {
+        minPrime[i] = i;
     }
-    
-    for(int i = 2; i < MAX; ++i) {
-        if(isPrime[i]) {
-            primes.push_back(i);
+    for(int i = 2; i * i < MAX; ++i) {
+        if(minPrime[i] == i) {
+            for(int j = i * i; j < MAX; j += i) {
+                if(minPrime[j] == j) {
+                    minPrime[j] = i;
+                }
+            }
         }
     }
 }
 
 void solve()
 {
-    long long n;
+    int n;
     cin >> n;
-
-    long long limit = sqrt(n);
-    auto it = upper_bound(primes.begin(), primes.end(), limit);
-    cout << (it - primes.begin()) << "\n";
+    FORE(i, 1, n) {
+        cout << minPrime[i] << " ";
+    }
+    cout << "\n";
 }
 
 signed main()
@@ -73,7 +66,6 @@ signed main()
     cin.tie(NULL);
     
     sieve();
-    
     int tc;
     cin >> tc;
     while(tc--) {

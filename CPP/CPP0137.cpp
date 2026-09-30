@@ -10,14 +10,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
 #define FOR(i, a, b) for(int i = a; i < b; i++)
 #define FORE(i, a, b) for(int i = a; i <= b; i++)
 #define FORLL(i, a, b) for(ll i = a; i < b; i++)
 #define FORELL(i, a, b) for(ll i = a; i <= b; i++)
 #define FORD(i, a, b) for(int i = a; i > b; i--)
-#define u_map unordered_map
-#define u_set unordered_set
 
 const int INF = 2e9;
 const ll INFLL = 2e18;
@@ -27,7 +26,6 @@ const ll MOD = 1000000007LL;
 
 #define pb push_back
 #define eb emplace_back
-#define pop pop_back
 #define ALL(v) (v).begin(), (v).end()
 #define sz(s) (ll)(s).length() // use for string
 
@@ -41,7 +39,7 @@ vector<long long> primes;
 void sieve() {
     fill(isPrime, isPrime + MAX, true);
     isPrime[0] = isPrime[1] = false;
-    
+
     for(int i = 2; i * i < MAX; ++i) {
         if(isPrime[i]) {
             for(int j = i * i; j < MAX; j += i) {
@@ -49,7 +47,7 @@ void sieve() {
             }
         }
     }
-    
+
     for(int i = 2; i < MAX; ++i) {
         if(isPrime[i]) {
             primes.push_back(i);
@@ -59,12 +57,23 @@ void sieve() {
 
 void solve()
 {
-    long long n;
-    cin >> n;
+    long long l, r;
+    cin >> l >> r;
 
-    long long limit = sqrt(n);
-    auto it = upper_bound(primes.begin(), primes.end(), limit);
-    cout << (it - primes.begin()) << "\n";
+    long long left = sqrt(l);
+    if(left * left < l) left++;
+
+    long long right = sqrt(r);
+
+    if(left > right) {
+        cout << 0 << "\n";
+        return;
+    }
+
+    auto it1 = lower_bound(primes.begin(), primes.end(), left);
+    auto it2 = upper_bound(primes.begin(), primes.end(), right);
+
+    cout << (it2 - it1) << "\n";
 }
 
 signed main()
@@ -73,7 +82,7 @@ signed main()
     cin.tie(NULL);
     
     sieve();
-    
+
     int tc;
     cin >> tc;
     while(tc--) {
